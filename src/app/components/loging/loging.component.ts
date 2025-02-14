@@ -21,23 +21,11 @@ export class LogingComponent {
     })
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Form submitted:', this.loginForm.value);
-      // Guardar los datos del formulario en el localStorage
-      localStorage.setItem('loginData', JSON.stringify(this.loginForm.value));
-
-      alert('Form data has been saved!');
-    } else {
-      console.log('Form is invalid');
-    }
-  }
-
-  ngOnInit() {
-    // Recuperar datos del localStorage si están disponibles
-    const savedData = localStorage.getItem('loginData');
-    if (savedData) {
-      this.loginForm.patchValue(JSON.parse(savedData));  // Rellenar los campos con los datos guardados
+  onSubmit(){
+    if(this.loginForm.valid){
+      console.log("Form submitted:", this.loginForm.value);
+    }else{
+      console.log("Form is invalid");
     }
   }
 

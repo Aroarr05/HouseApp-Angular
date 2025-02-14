@@ -30,10 +30,29 @@ export class DetailsComponent {
   }
   
   submitApplication() {
-    this.housingService.submitApplication(
-      this.applyForm.value.firstName ?? '',
-      this.applyForm.value.lastName ?? '',
-      this.applyForm.value.email ?? '',
-    );
+    if (this.applyForm.valid) {
+      const newApplication = this.applyForm.value;
+
+      // Obtener aplicaciones previas desde localStorage (si existen)
+      const savedApplications = localStorage.getItem('userApplications');
+      let applicationsArray = savedApplications ? JSON.parse(savedApplications) : [];
+
+      // Agregar nueva aplicación al array
+      applicationsArray.push(newApplication);
+
+      // Guardar array actualizado en localStorage
+      localStorage.setItem('userApplications', JSON.stringify(applicationsArray));
+
+      alert('Aplicación guardada correctamente en localStorage.');
+
+      // Opcional: Llamar al servicio para enviar la aplicación
+      this.housingService.submitApplication(
+        newApplication.firstName ?? '',
+        newApplication.lastName ?? '',
+        newApplication.email ?? ''
+      );
+    } else {
+      alert('Por favor, completa todos los campos.');
+    }
   }
 }
