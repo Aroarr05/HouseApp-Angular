@@ -1,27 +1,37 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HousingLocationComponent} from '../housing-location/housing-location.component';
-import {HousingLocation} from '../housinglocation';
-import {HousingService} from '../housing.service';
-
+import {HousingLocation} from '../../model/housinglocation';
+import {HousingService} from '../../service/housing.service';
+import { LogingComponent } from "../loging/loging.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HousingLocationComponent],
+  imports: [CommonModule, HousingLocationComponent, LogingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
   filteredLocationList: HousingLocation[] = [];
+  
+  private router = inject(Router);
+
   constructor() {
     this.housingService.getAllHousingLocations().then((housingLocationList: HousingLocation[]) => {
       this.housingLocationList = housingLocationList;
       this.filteredLocationList = housingLocationList;
     });
   }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']); 
+  }
+
   filterResults(text: string) {
     if (!text) {
       this.filteredLocationList = this.housingLocationList;

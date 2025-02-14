@@ -28,3 +28,21 @@
     content: "\203A";
     margin-left: 5px;
   }
+  .listing-coordinates {
+    padding: 10px 20px 20px 20px;  
+    font-size: 14px;               
+    color: var(--secondary-color); 
+    font-weight: 500;              
+  }
+  
+  .listing-coordinates::before {
+    display: inline-block;
+    margin-right: 5px; 
+    vertical-align: middle;  
+  }
+  
+  .listing-coordinates span {
+    color: var(--highlight-color); 
+    font-weight: bold;  
+  }
+  
