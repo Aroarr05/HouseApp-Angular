@@ -9,6 +9,8 @@
             "availableUnits": 4,
             "wifi": true,
             "laundry": true,
+            "seguridad":"Si",
+            "tipoSeguridad": "Detectores de humos",
             "coordinates": { "latitude": 41.8781, "longitude": -87.6298 }
         },
         {
@@ -20,6 +22,8 @@
             "availableUnits": 0,
             "wifi": false,
             "laundry": true,
+            "seguridad":"Si",
+            "tipoSeguridad": "Alarma",
             "coordinates": { "latitude": 34.0195, "longitude": -118.4912 }
         },
         {
@@ -31,6 +35,8 @@
             "availableUnits": 1,
             "wifi": false,
             "laundry": false,
+            "seguridad":"Si",
+            "tipoSeguridad": "Cámaras",
             "coordinates": { "latitude": 58.3019, "longitude": -134.4197 }
         },
         {
@@ -42,6 +48,8 @@
             "availableUnits": 1,
             "wifi": true,
             "laundry": false,
+            "seguridad":"No",
+            "tipoSeguridad": "No tiene",
             "coordinates": { "latitude": 41.8781, "longitude": -87.6298 }
         },
         {
@@ -53,6 +61,8 @@
             "availableUnits": 1,
             "wifi": true,
             "laundry": false,
+            "seguridad":"Si",
+            "tipoSeguridad": "Puertas reforzadas",
             "coordinates": { "latitude": 41.5934, "longitude": -87.3464 }
         },
         {
@@ -64,6 +74,8 @@
             "availableUnits": 2,
             "wifi": true,
             "laundry": true,
+            "seguridad":"Si",
+            "tipoSeguridad": "Detectores de humos",
             "coordinates": { "latitude": 37.8044, "longitude": -122.2711 }
         },
         {
@@ -75,6 +87,8 @@
             "availableUnits": 5,
             "wifi": true,
             "laundry": true,
+            "seguridad":"Si",
+            "tipoSeguridad": "Puertas reforzadas",
             "coordinates": { "latitude": 37.8044, "longitude": -122.2711 }
         },
         {
@@ -86,6 +100,8 @@
             "availableUnits": 2,
             "wifi": true,
             "laundry": true,
+            "seguridad":"Si",
+            "tipoSeguridad": "Cámaras",
             "coordinates": { "latitude": 37.8044, "longitude": -122.2711 }
         },
         {
@@ -97,6 +113,8 @@
             "availableUnits": 10,
             "wifi": false,
             "laundry": false,
+            "seguridad":"No",
+            "tipoSeguridad": "No tiene",
             "coordinates": { "latitude": 37.8044, "longitude": -122.2711 }
         },
         {
@@ -108,6 +126,8 @@
             "availableUnits": 6,
             "wifi": true,
             "laundry": true,
+            "seguridad":"Si",
+            "tipoSeguridad": "Alarma",
             "coordinates": { "latitude": 45.5051, "longitude": -122.6750 }
         }
     ]

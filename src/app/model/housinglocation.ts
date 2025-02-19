@@ -12,5 +12,7 @@ export interface HousingLocation {
   availableUnits: number;
   wifi: boolean;
   laundry: boolean;
+  seguridad: string;
+  tipoSeguridad: "alarmas" | "camaras" | "puertasReforzadas" | "detectorHumos" | "otro"| "noTiene";
   coordinates: Coordinates;
 }

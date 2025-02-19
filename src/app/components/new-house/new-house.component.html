@@ -1,0 +1,121 @@
+<form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" formControlName="name" type="text" />
+    <div *ngIf="houseForm.get('name')?.touched && houseForm.get('name')?.invalid">
+      <small *ngIf="houseForm.get('name')?.hasError('required')">
+        Name is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="city">City</label>
+    <input id="city" formControlName="city" type="text" />
+    <div *ngIf="houseForm.get('city')?.touched && houseForm.get('city')?.invalid">
+      <small *ngIf="houseForm.get('city')?.hasError('required')">
+        City is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="state">State</label>
+    <input id="state" formControlName="state" type="text" />
+    <div *ngIf="houseForm.get('state')?.touched && houseForm.get('state')?.invalid">
+      <small *ngIf="houseForm.get('state')?.hasError('required')">
+        State is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="photo">Photo</label>
+    <input id="photo" formControlName="photo" type="url" />
+    <div *ngIf="houseForm.get('photo')?.touched && houseForm.get('photo')?.invalid"></div>
+  </div>
+
+  <div>
+    <label for="availableUnits">AvailableUnits</label>
+    <input id="availableUnits" formControlName="availableUnits" type="number" />
+    <div *ngIf="houseForm.get('availableUnits')?.touched && houseForm.get('availableUnits')?.invalid">
+      <small *ngIf="houseForm.get('availableUnits')?.hasError('required')">
+        AvailableUnits is required
+      </small>
+    </div>
+  </div>
+
+
+  <div>
+    <label for="wifi">Wifi</label>
+    <p>SI</p>
+    <input id="wifi" formControlName="si" type="radio" />
+    <p>NO</p>
+    <input id="wifi" formControlName="no" type="radio" />
+    <div *ngIf="houseForm.get('wifi')?.touched && houseForm.get('wifi')?.invalid">
+      <small *ngIf="houseForm.get('wifi')?.hasError('required')">
+        Wifi is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="laundry">Laundry</label>
+    <p>SI</p>
+    <input id="laundry" formControlName="si" type="radio" />
+    <p>NO</p>
+    <input id="laundry" formControlName="no" type="radio" />
+    <div *ngIf="houseForm.get('laundry')?.touched && houseForm.get('laundry')?.invalid">
+      <small *ngIf="houseForm.get('laundry')?.hasError('required')">
+        Laundry is required
+      </small>
+    </div>
+  </div>
+
+
+  <div>
+    <label for="seguridad">Seguridad</label>
+
+    <p>SI</p>
+    <input id="seguridad" formControlName="si" type="radio" />
+    <p>NO</p>
+    <input id="seguridad" formControlName="no" type="radio" />
+    <div *ngIf="houseForm.get('seguridad')?.touched && houseForm.get('seguridad')?.invalid">
+      <small *ngIf="houseForm.get('seguridad')?.hasError('required')">
+        Seguridad is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="tipoSeguridad"> Tipo de Seguridad</label>
+    <select id="tipoSeguridad" formControlName="tipoSeguridad">
+      <option value="alarmas">Alarmas</option>
+      <option value="camaras">Cámaras</option>
+      <option value="puertasReforzadas">Puertas Reforzadas</option>
+      <option value="detectorHumos">Detector de humo</option>
+      <option value="otro">Otro</option>
+      <option value="no">No tiene</option>
+    </select>
+    <div *ngIf="houseForm.get('tipoSeguridad')?.touched && houseForm.get('tipoSeguridad')?.invalid">
+      <small *ngIf="houseForm.get('city')?.hasError('required')">
+        Last city is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="coordinates">Coordinates</label>
+    <p>Latitude:</p>
+    <input id="coordinates" formControlName="latitude" type="number" />
+    <p>Longitude:</p>
+    <input id="coordinates" formControlName="longitude" type="number" />
+    <div *ngIf="houseForm.get('coordinates')?.touched && houseForm.get('coordinates')?.invalid">
+      <small *ngIf="houseForm.get('city')?.hasError('required')">
+        Last city is required
+      </small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="houseForm.invalid">Submit</button>
+</form>

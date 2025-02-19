@@ -14,6 +14,7 @@ export class HousingService {
     const data = await fetch(`${this.url}/${id}`);
     return (await data.json()) ?? {};
   }
+  
   submitApplication(firstName: string, lastName: string, email: string) {
     // tslint:disable-next-line
     console.log(firstName, lastName, email);
