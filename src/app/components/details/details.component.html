@@ -17,6 +17,16 @@
       <li>Does this location have laundry: {{ housingLocation?.laundry }}</li>
     </ul>
   </section>
+
+  <section>
+    <div class="row mt-5">
+      <div class="col-12">
+        <h3 class="text-center mb-4">Mapa de Destinos</h3>
+        <div id="map" style="width: 100%; height: 400px;"></div>
+      </div>
+    </div>
+  </section>
+  
   <section class="listing-apply">
     <h2 class="section-heading">Apply now to live here</h2>
     <form [formGroup]="applyForm" (submit)="submitApplication()">
