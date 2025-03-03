@@ -1,10 +1,9 @@
-import { Component, inject, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../../service/housing.service';
 import { HousingLocation } from '../../model/housinglocation';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
 import { Coordinates } from '../../model/housinglocation';
 
 @Component({
@@ -12,15 +11,12 @@ import { Coordinates } from '../../model/housinglocation';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './details.component.html',
-  styleUrl: './details.component.css'
+  styleUrls: ['./details.component.css']
 })
 
-export class DetailsComponent implements AfterViewInit {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  housingService = inject(HousingService);
+export class DetailsComponent implements OnInit, AfterViewInit {
   housingLocation: HousingLocation | undefined;
-
-  private map: any;
+  private mapa: any;
   private L: any;
 
   applyForm = new FormGroup({
@@ -29,32 +25,28 @@ export class DetailsComponent implements AfterViewInit {
     email: new FormControl(''),
   });
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+  constructor(
+    private route: ActivatedRoute,
+    private housingService: HousingService,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
 
-  async ngOnInit() {
+  ngOnInit(): void {
     const housingLocationId = parseInt(this.route.snapshot.params['id'], 10);
-    this.housingLocation = await this.housingService.getHousingLocationById(housingLocationId);
-    if (this.housingLocation?.coordinates) {
-      this.initializeMap();
-    }
+    this.housingService.getHousingLocationById(housingLocationId).then((data) => {
+      this.housingLocation = data;
+    });
   }
 
-  submitApplication() {
+  submitApplication(): void {
     if (this.applyForm.valid) {
       const newApplication = this.applyForm.value;
-      // Obtener aplicaciones previas desde localStorage (si existen)
       const savedApplications = localStorage.getItem('userApplications');
       let applicationsArray = savedApplications ? JSON.parse(savedApplications) : [];
-
-      // Agregar nueva aplicación al array
       applicationsArray.push(newApplication);
-
-      // Guardar array actualizado en localStorage
       localStorage.setItem('userApplications', JSON.stringify(applicationsArray));
 
       alert('Aplicación guardada correctamente en localStorage.');
-
-      // Opcional: Llamar al servicio para enviar la aplicación
       this.housingService.submitApplication(
         newApplication.firstName ?? '',
         newApplication.lastName ?? '',
@@ -65,49 +57,48 @@ export class DetailsComponent implements AfterViewInit {
     }
   }
 
+  private inicializarMapa(): void {
+    if (!this.mapa) {
+      this.mapa = this.L.map('map').setView([0, 0], 2);
+      
+      this.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.mapa);
+
+      this.L.circle([0, 0], {
+        color: 'purple',
+        fillColor: 'purple',
+        fillOpacity: 0.6,
+        radius: 50000
+      }).addTo(this.mapa)
+        .bindPopup('<b>Ubicación inicial</b>')
+        .openPopup();
+    }
+
+    if (this.housingLocation?.coordinates) {
+      this.verMapa(this.housingLocation.coordinates);
+    }
+  }
+
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      import('leaflet')
-        .then((L) => {
-          this.L = L;
-          this.initializeMap();
-        })
+      import('leaflet').then((L: typeof import('leaflet')) => {
+        this.L = L;
+        this.inicializarMapa();
+      });
     }
   }
 
-  private initializeMap(): void {
-    if (!this.L) {
-      return;
-    }
-
-    setTimeout(() => {
-      const mapContainer = document.getElementById('map');
-      if (!mapContainer) {
-        return;
-      }
-
-      if (!this.map) {
-        this.map = this.L.map('map').setView([0, 0], 2); 
-        this.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(this.map);
-      }
-
-      if (this.housingLocation?.coordinates) {
-        this.verMapa(this.housingLocation.coordinates); 
-      }
-
-      setTimeout(() => {
-        this.map.invalidateSize();
-      }, 500);
-    }, 500); 
-  }
-
-  private verMapa(coordinates: Coordinates): void {
-    if (this.map && this.L) {
-      this.map.setView([coordinates.latitude, coordinates.longitude], 13);
-      this.L.marker([coordinates.latitude, coordinates.longitude]).addTo(this.map)
-        .bindPopup(`<b>Ubicación: ${coordinates.latitude}, ${coordinates.longitude}</b>`)
+  verMapa(coordenadas: Coordinates): void {
+    if (isPlatformBrowser(this.platformId) && this.mapa) {
+      this.mapa.setView([coordenadas.latitude, coordenadas.longitude], 13);
+      this.L.circle([coordenadas.latitude, coordenadas.longitude], {
+        color: 'purple',
+        fillColor: 'purple',
+        fillOpacity: 0.6,
+        radius: 500
+      }).addTo(this.mapa)
+        .bindPopup(`<b>${coordenadas.latitude}, ${coordenadas.longitude}</b>`)
         .openPopup();
     }
   }
