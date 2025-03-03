@@ -89,18 +89,14 @@ export class DetailsComponent implements OnInit, AfterViewInit {
           this.mapa.removeLayer(layer);
         }
       });
-
-      this.L.marker([coordenadas.latitude, coordenadas.longitude])
-        .addTo(this.mapa)
-        .bindPopup(`<b>Ubicación: ${coordenadas.latitude}, ${coordenadas.longitude}</b>`)
-        .openPopup();
-
-      this.circleLayer = this.L.circle([coordenadas.latitude, coordenadas.longitude], {
+      this.L.circle([coordenadas.latitude, coordenadas.longitude], {
         color: 'purple',
         fillColor: 'purple',
         fillOpacity: 0.6,
         radius: 500
-      }).addTo(this.mapa);
+      }).addTo(this.mapa)
+        .bindPopup(`<b>${coordenadas.latitude}, ${coordenadas.longitude}</b>`)
+        .openPopup();      
     }
   }
 }
