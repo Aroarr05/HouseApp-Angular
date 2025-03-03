@@ -14,6 +14,7 @@ import { Coordinates } from '../../model/housinglocation';
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
+
 export class DetailsComponent implements AfterViewInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
@@ -33,7 +34,6 @@ export class DetailsComponent implements AfterViewInit {
   async ngOnInit() {
     const housingLocationId = parseInt(this.route.snapshot.params['id'], 10);
     this.housingLocation = await this.housingService.getHousingLocationById(housingLocationId);
-    // Llamar a `verMapa()` solo si el mapa ya está inicializado
     if (this.housingLocation?.coordinates) {
       this.initializeMap();
     }
@@ -42,7 +42,6 @@ export class DetailsComponent implements AfterViewInit {
   submitApplication() {
     if (this.applyForm.valid) {
       const newApplication = this.applyForm.value;
-
       // Obtener aplicaciones previas desde localStorage (si existen)
       const savedApplications = localStorage.getItem('userApplications');
       let applicationsArray = savedApplications ? JSON.parse(savedApplications) : [];
@@ -73,10 +72,6 @@ export class DetailsComponent implements AfterViewInit {
           this.L = L;
           this.initializeMap();
         })
-        .catch((error) => {
-          // No registramos el error en la consola, solo lo manejamos
-          console.warn('Error al cargar Leaflet, la librería no se ha cargado.');
-        });
     }
   }
 
@@ -92,20 +87,20 @@ export class DetailsComponent implements AfterViewInit {
       }
 
       if (!this.map) {
-        this.map = this.L.map('map').setView([0, 0], 2); // Coordenadas iniciales
+        this.map = this.L.map('map').setView([0, 0], 2); 
         this.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.map);
       }
 
       if (this.housingLocation?.coordinates) {
-        this.verMapa(this.housingLocation.coordinates); // Solo mostrar mapa si las coordenadas están disponibles
+        this.verMapa(this.housingLocation.coordinates); 
       }
 
       setTimeout(() => {
-        this.map.invalidateSize(); // Asegurar que el mapa se renderice correctamente
+        this.map.invalidateSize();
       }, 500);
-    }, 500); // Esperamos medio segundo para asegurar que el contenedor del mapa esté disponible
+    }, 500); 
   }
 
   private verMapa(coordinates: Coordinates): void {
