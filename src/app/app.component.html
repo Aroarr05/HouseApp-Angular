@@ -1,0 +1,16 @@
+<main>
+  <header class="brand-header">
+    <a [routerLink]="['/']" class="brand-name">
+      <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
+    </a>
+
+    <div class="user-section">
+      <button class="primary" (click)="navigateToLogin()">Login</button>
+      <span *ngIf="userName" class="user-name">Hola, {{ userName }}</span>
+    </div>
+  </header>
+
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
+</main>

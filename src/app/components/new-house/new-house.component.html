@@ -1,0 +1,155 @@
+<form class="form-container" [formGroup]="houseForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Nombre</label>
+    <input id="name" formControlName="name" type="text" />
+    <div *ngIf="houseForm.get('name')?.touched && houseForm.get('name')?.invalid">
+      <small *ngIf="houseForm.get('name')?.hasError('required')">
+        El nombre es obligatorio
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="city">Ciudad</label>
+    <input id="city" formControlName="city" type="text" />
+    <div *ngIf="houseForm.get('city')?.touched && houseForm.get('city')?.invalid">
+      <small *ngIf="houseForm.get('city')?.hasError('required')">
+        La ciudad es obligatoria
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="state">Estado</label>
+    <input id="state" formControlName="state" type="text" />
+    <div *ngIf="houseForm.get('state')?.touched && houseForm.get('state')?.invalid">
+      <small *ngIf="houseForm.get('state')?.hasError('required')">
+        El estado es obligatorio
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="photo">Foto</label>
+    <input id="photo" formControlName="photo" type="url" />
+  </div>
+
+  <div>
+    <label for="availableUnits">Unidades disponibles</label>
+    <input id="availableUnits" formControlName="availableUnits" type="number" min="1" />
+    <div *ngIf="houseForm.get('availableUnits')?.touched && houseForm.get('availableUnits')?.invalid">
+      <small *ngIf="houseForm.get('availableUnits')?.hasError('required')">
+        Las unidades disponibles son obligatorias
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="wifi">¿Tiene Wifi?</label>
+    <label>
+      <input type="radio" value="si" formControlName="wifi" /> Sí
+    </label>
+    <label>
+      <input type="radio" value="no" formControlName="wifi" /> No
+    </label>
+    <div *ngIf="houseForm.get('wifi')?.touched && houseForm.get('wifi')?.invalid">
+      <small *ngIf="houseForm.get('wifi')?.hasError('required')">
+        El campo Wifi es obligatorio
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="laundry">¿Tiene Lavandería?</label>
+    <label>
+      <input type="radio" value="si" formControlName="laundry" /> Sí
+    </label>
+    <label>
+      <input type="radio" value="no" formControlName="laundry" /> No
+    </label>
+    <div *ngIf="houseForm.get('laundry')?.touched && houseForm.get('laundry')?.invalid">
+      <small *ngIf="houseForm.get('laundry')?.hasError('required')">
+        El campo Lavandería es obligatorio
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="seguridad">¿Tiene Seguridad?</label>
+    <label>
+      <input type="radio" value="si" formControlName="seguridad" /> Sí
+    </label>
+    <label>
+      <input type="radio" value="no" formControlName="seguridad" /> No
+    </label>
+    <div *ngIf="houseForm.get('seguridad')?.touched && houseForm.get('seguridad')?.invalid">
+      <small *ngIf="houseForm.get('seguridad')?.hasError('required')">
+        El campo Seguridad es obligatorio
+      </small>
+    </div>
+  </div>
+
+  <!-- Mostrar si selecciona que tiene seguridad -->
+  <div *ngIf="houseForm.get('seguridad')?.value === 'si'">
+    <label for="tipoSeguridad">Tipo de Seguridad</label>
+
+    <label>
+      <input type="checkbox" (change)="toggleAllCheckboxes($event)" /> Todas
+    </label>
+
+    <label>
+      Alarmas <input type="checkbox" value="Alarmas" (change)="onCheckboxChange($event)"
+        [checked]="isChecked('Alarmas')" />
+    </label>
+
+    <label>
+      Cámaras <input type="checkbox" value="Cámaras" (change)="onCheckboxChange($event)"
+        [checked]="isChecked('Cámaras')" />
+    </label>
+
+    <label>
+      Puertas reforzadas <input type="checkbox" value="Puertas reforzadas" (change)="onCheckboxChange($event)"
+        [checked]="isChecked('Puertas reforzadas')" />
+    </label>
+
+    <label>
+      Detector de humo <input type="checkbox" value="Detector de humo" (change)="onCheckboxChange($event)"
+        [checked]="isChecked('Detector de humo')" />
+    </label>
+
+    <label>
+      Otro <input type="checkbox" value="Otro" (change)="onCheckboxChange($event)" [checked]="isChecked('Otro')" />
+    </label>
+
+    <div *ngIf="houseForm.get('tipoSeguridad')?.touched && houseForm.get('tipoSeguridad')?.invalid">
+      <small
+        *ngIf="houseForm.get('tipoSeguridad')?.hasError('required') || houseForm.get('tipoSeguridad')?.hasError('minlength')">
+        Debe seleccionar al menos un tipo de seguridad
+      </small>
+    </div>
+  </div>
+
+
+  <div>
+    <label for="coordinates">Coordenadas</label>
+    <div class="coordinate-group">
+      <div>
+        <label>Latitud</label>
+        <input formControlName="latitude" type="number" />
+        <div *ngIf="houseForm.get('latitude')?.touched && houseForm.get('latitude')?.invalid">
+          <small *ngIf="houseForm.get('latitude')?.hasError('required')">La latitud es obligatoria</small>
+        </div>
+      </div>
+      <div>
+        <label>Longitud</label>
+        <input formControlName="longitude" type="number" />
+        <div *ngIf="houseForm.get('longitude')?.touched && houseForm.get('longitude')?.invalid">
+          <small *ngIf="houseForm.get('longitude')?.hasError('required')">La longitud es obligatoria</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <button type="submit" [disabled]="houseForm.invalid">Enviar</button>
+</form>
