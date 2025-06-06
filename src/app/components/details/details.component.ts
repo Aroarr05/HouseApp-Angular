@@ -3,8 +3,9 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../../service/housing.service';
 import { HousingLocation } from '../../model/housinglocation';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Coordinates } from '../../model/housinglocation';
+
 
 @Component({
   selector: 'app-details',
@@ -20,10 +21,10 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   private circleLayer: any; // Variable para el círculo morado
 
   applyForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-  });
+  firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+  lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+  email: new FormControl('', [Validators.required, Validators.email])
+});
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +59,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
       alert('Por favor, completa todos los campos.');
     }
   }*/
+
   submitApplication(): void {
     if (this.applyForm.valid && this.housingLocation) {
       const newApplication = this.applyForm.value;

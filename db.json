@@ -11,7 +11,7 @@
       "laundry": true,
       "seguridad": "Si",
       "tipoSeguridad": "Detectores de humos",
-      "status":"Disponible",
+      "status": "Disponible",
       "coordinates": {
         "latitude": 41.8781,
         "longitude": -87.6298
@@ -28,7 +28,7 @@
       "laundry": true,
       "seguridad": "Si",
       "tipoSeguridad": "Alarma",
-      "status":"Reservado",
+      "status": "Reservado",
       "coordinates": {
         "latitude": 34.0195,
         "longitude": -118.4912
@@ -45,7 +45,7 @@
       "laundry": false,
       "seguridad": "Si",
       "tipoSeguridad": "Cámaras",
-      "status":"Vendido",
+      "status": "Vendido",
       "coordinates": {
         "latitude": 58.3019,
         "longitude": -134.4197
@@ -62,7 +62,7 @@
       "laundry": false,
       "seguridad": "No",
       "tipoSeguridad": "Cámaras",
-      "status":"Alquilado",
+      "status": "Alquilado",
       "coordinates": {
         "latitude": 41.8781,
         "longitude": -87.6298
@@ -79,7 +79,7 @@
       "laundry": false,
       "seguridad": "Si",
       "tipoSeguridad": "Puertas reforzadas",
-      "status":"Disponible",
+      "status": "Disponible",
       "coordinates": {
         "latitude": 41.5934,
         "longitude": -87.3464
@@ -96,7 +96,7 @@
       "laundry": true,
       "seguridad": "Si",
       "tipoSeguridad": "Detectores de humos",
-      "status":"Reservado",
+      "status": "Reservado",
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
@@ -113,7 +113,7 @@
       "laundry": true,
       "seguridad": "Si",
       "tipoSeguridad": "Puertas reforzadas",
-      "status":"Vendido",
+      "status": "Vendido",
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
@@ -130,7 +130,7 @@
       "laundry": true,
       "seguridad": "Si",
       "tipoSeguridad": "Cámaras",
-      "status":"Alquilado",
+      "status": "Alquilado",
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
@@ -147,7 +147,7 @@
       "laundry": false,
       "seguridad": "No",
       "tipoSeguridad": "Cámaras",
-      "status":"Disponible",
+      "status": "Disponible",
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
@@ -164,10 +164,53 @@
       "laundry": true,
       "seguridad": "Si",
       "tipoSeguridad": "Alarma",
-      "status":"Reservado",
+      "status": "Reservado",
       "coordinates": {
         "latitude": 45.5051,
         "longitude": -122.675
+      }
+    },
+    {
+      "id": 10,
+      "name": "Av",
+      "city": "ññ",
+      "state": "dd",
+      "photo": "assets/sinImagen.jpg",
+      "availableUnits": 10,
+      "wifi": true,
+      "laundry": true,
+      "seguridad": "si",
+      "tipoSeguridad": [
+        "Alarmas",
+        "Cámaras",
+        "Puertas reforzadas",
+        "Detector de humo",
+        "Otro"
+      ],
+      "status": "desponible",
+      "coordinates": {
+        "latitude": 63,
+        "longitude": 45
+      }
+    },
+    {
+      "id": 11,
+      "name": "Av",
+      "city": "ññ",
+      "state": "dd",
+      "photo": "https://ethic.es/wp-content/uploads/2023/03/imagen.jpg",
+      "availableUnits": 3,
+      "wifi": true,
+      "laundry": true,
+      "seguridad": "si",
+      "tipoSeguridad": [
+        "Cámaras",
+        "Puertas reforzadas"
+      ],
+      "status": "desponible",
+      "coordinates": {
+        "latitude": 63,
+        "longitude": 888
       }
     }
   ]

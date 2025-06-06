@@ -15,6 +15,15 @@
     </ul>
   </section>
 
+  <!--Si tiene wifi
+  <section class="listing-features">
+  <h2 class="section-heading">About this housing location</h2>
+  <ul>
+    <li *ngIf="housingLocation?.wifi === true">Does this location have wifi: Yes</li>
+  </ul>
+  </section>-->
+
+
   <section>
     <h3>Seguridiad</h3>
     <ul>
@@ -59,16 +68,30 @@
     <form [formGroup]="applyForm" (submit)="submitApplication()">
       <label for="first-name">First Name</label>
       <input id="first-name" type="text" formControlName="firstName" />
+      <div *ngIf="applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched" class="error">
+        <small *ngIf="applyForm.get('firstName')?.errors?.['required']">First name is required.</small>
+        <small *ngIf="applyForm.get('firstName')?.errors?.['minlength']">Minimum 2 characters required.</small>
+      </div>
+
       <label for="last-name">Last Name</label>
       <input id="last-name" type="text" formControlName="lastName" />
+      <div *ngIf="applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched" class="error">
+        <small *ngIf="applyForm.get('lastName')?.errors?.['required']">Last name is required.</small>
+        <small *ngIf="applyForm.get('lastName')?.errors?.['minlength']">Minimum 2 characters required.</small>
+      </div>
+
       <label for="email">Email</label>
       <input id="email" type="email" formControlName="email" />
+      <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="error">
+        <small *ngIf="applyForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="applyForm.get('email')?.errors?.['email']">Please enter a valid email.</small>
+      </div>
 
       <button type="submit" class="primary" [disabled]="applyForm.invalid || housingLocation?.availableUnits === 0">
         Apply now
       </button>
-
     </form>
+
   </section>
 
 </article>

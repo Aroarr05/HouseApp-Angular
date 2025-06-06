@@ -127,10 +127,12 @@ export class NewHouseComponent implements OnInit{
     return this.houseForm.get('tipoSeguridad') as FormArray;
   }
 
+  //  Compruebo que los checked esten selccionados 
   isChecked (value: string): boolean{
     return this.tipoSeguridadFormArray.value.includes(value);
   }
 
+  // Manejo de checkbox
   onCheckboxChange(event: any){
     const value = event.target.value;
     const formArray = this.tipoSeguridadFormArray;
@@ -146,6 +148,7 @@ export class NewHouseComponent implements OnInit{
     }
   }
 
+  //Seleccionar todo
   toggleAllCheckboxes(event: any){
     const formArray = this.tipoSeguridadFormArray;
     formArray.clear();
@@ -153,6 +156,5 @@ export class NewHouseComponent implements OnInit{
       this.tiposSeguridad.forEach(tipo=> formArray.push(this.fb.control(tipo)));
     }
   }
-
 
 }

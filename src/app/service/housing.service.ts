@@ -25,7 +25,7 @@ export class HousingService {
   getAllHousingLocati(): HousingLocation[] {
     return this.housingList;
   }
-  
+
   // -----------Formulario
 
   private housingList: HousingLocation[] = [];
@@ -41,14 +41,13 @@ export class HousingService {
   }
 
   updateHousingLocation(id: number, data: Partial<HousingLocation>): void {
-  const locations = JSON.parse(localStorage.getItem('housingLocations') || '[]');
-  const index = locations.findIndex((loc: HousingLocation) => loc.id === id);
+    const locations = JSON.parse(localStorage.getItem('housingLocations') || '[]');
+    const index = locations.findIndex((loc: HousingLocation) => loc.id === id);
 
-  if (index !== -1) {
-    locations[index] = { ...locations[index], ...data };
-    localStorage.setItem('housingLocations', JSON.stringify(locations));
+    if (index !== -1) {
+      locations[index] = { ...locations[index], ...data };
+      localStorage.setItem('housingLocations', JSON.stringify(locations));
+    }
   }
-}
-
 
 }
