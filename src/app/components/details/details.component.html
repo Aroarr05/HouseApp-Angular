@@ -49,6 +49,27 @@
       <li>{{housingLocation?.availableUnits}}</li>
     </ul>
   </section>
+  <br>
+  <section>
+    <h3>Tipo casa:</h3>
+    <ul>
+      <li>{{housingLocation?.type}}.</li>
+    </ul>
+  </section>
+  <br>
+  <section>
+    <h3>Dormitorios:</h3>
+    <ul>
+      <li>{{housingLocation?.bedrooms}}.</li>
+    </ul>
+  </section>
+  <br>
+
+  <section class="listing-features">
+    <ul>
+      <li *ngIf="housingLocation?.hasGarage === true">Si tiene garaje.</li>
+    </ul>
+  </section>
 
   <br>
 
@@ -86,6 +107,7 @@
         <small *ngIf="applyForm.get('email')?.errors?.['required']">Email is required.</small>
         <small *ngIf="applyForm.get('email')?.errors?.['email']">Please enter a valid email.</small>
       </div>
+
 
       <button type="submit" class="primary" [disabled]="applyForm.invalid || housingLocation?.availableUnits === 0">
         Apply now

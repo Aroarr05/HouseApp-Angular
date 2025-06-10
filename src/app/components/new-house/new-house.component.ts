@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HousingService } from '../../service/housing.service';
@@ -14,16 +14,16 @@ import { HousingLocation } from '../../model/housinglocation';
   styleUrls: ['./new-house.component.css']
 })
 
-export class NewHouseComponent implements OnInit{
+export class NewHouseComponent implements OnInit {
   houseForm: FormGroup;
   isBrowser: boolean;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private housingService: HousingService,
-    @Inject(PLATFORM_ID) private platformId :Object
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.isBrowser = isPlatformBrowser (this.platformId);
+    this.isBrowser = isPlatformBrowser(this.platformId);
 
     this.houseForm = this.fb.group({
       name: ['', Validators.required],
@@ -36,7 +36,10 @@ export class NewHouseComponent implements OnInit{
       seguridad: ['', Validators.required],
       tipoSeguridad: this.fb.array([]),
       latitude: [null, Validators.required],
-      longitude: [null, Validators.required]
+      longitude: [null, Validators.required],
+      type:[''],
+      bedrooms:[0, Validators.required],
+      hasGarage: ['', Validators.required]
     });
   }
 
@@ -44,11 +47,11 @@ export class NewHouseComponent implements OnInit{
     if (this.houseForm.valid) {
       const formValue = this.houseForm.value;
 
-      const existingLocations= this.housingService.getAllHousingLocations();
-      const maxId = (await existingLocations).reduce((max,loc)=> Math.max(max, loc.id), 0);
-      const newId = maxId +1;
+      const existingLocations = this.housingService.getAllHousingLocations();
+      const maxId = (await existingLocations).reduce((max, loc) => Math.max(max, loc.id), 0);
+      const newId = maxId + 1;
 
-      const photoUrl = formValue.photo && formValue.photo.trim() !== ''? formValue.photo : 'assets/sinImagen.jpg'
+      const photoUrl = formValue.photo && formValue.photo.trim() !== '' ? formValue.photo : 'assets/sinImagen.jpg'
 
       const newLocation: HousingLocation = {
         id: newId,
@@ -61,18 +64,22 @@ export class NewHouseComponent implements OnInit{
         laundry: formValue.laundry === 'si',
         seguridad: formValue.seguridad,
         tipoSeguridad: formValue.tipoSeguridad,
-        status:'desponible',
+        status: 'desponible',
         coordinates: {
           latitude: formValue.latitude,
           longitude: formValue.longitude,
-        }
+        },
+        type: formValue.type,
+        bedrooms: formValue.bedrooms,
+        hasGarage: formValue.hasGarage ==="si"
+
       };
 
-      if (this.isBrowser){
+      if (this.isBrowser) {
         localStorage.removeItem('eventFormData');
       }
 
-      this.houseForm. reset();
+      this.houseForm.reset();
 
       try {
         await this.housingService.addHousingLocation(newLocation);
@@ -84,34 +91,34 @@ export class NewHouseComponent implements OnInit{
     }
   }
 
-  private saveFormToLocalStorage(){
-    if (this.isBrowser){
+  private saveFormToLocalStorage() {
+    if (this.isBrowser) {
       localStorage.setItem('eventFormData', JSON.stringify(this.houseForm.value));
     }
   }
 
-  private loadFormFromLocalStorage(){
-    if (this.isBrowser){
+  private loadFormFromLocalStorage() {
+    if (this.isBrowser) {
       const savedForm = localStorage.getItem('eventFormData');
-      if(savedForm){
+      if (savedForm) {
         this.houseForm.patchValue(JSON.parse(savedForm));
       }
     }
   }
 
   ngOnInit() {
-    if (this.isBrowser){
+    if (this.isBrowser) {
       this.loadFormFromLocalStorage();
     }
-    this.houseForm.valueChanges.subscribe(()=>{
+    this.houseForm.valueChanges.subscribe(() => {
       this.saveFormToLocalStorage();
     });
-    this.houseForm.get('seguridad')?.valueChanges.subscribe(value =>{
+    this.houseForm.get('seguridad')?.valueChanges.subscribe(value => {
       const tipoSeguridadControl = this.houseForm.get('tipoSeguridad') as FormArray;
-    
-      if(value === 'si'){
+
+      if (value === 'si') {
         tipoSeguridadControl.setValidators([Validators.required, Validators.minLength(1)]);
-      }else{
+      } else {
         tipoSeguridadControl.clearValidators();
         tipoSeguridadControl.clear();
       }
@@ -121,39 +128,39 @@ export class NewHouseComponent implements OnInit{
 
   //Extra en el formulario Seguridad
 
-  tiposSeguridad = ['Alarmas', 'Cámaras','Puertas reforzadas','Detector de humo','Otro'];
+  tiposSeguridad = ['Alarmas', 'Cámaras', 'Puertas reforzadas', 'Detector de humo', 'Otro'];
 
-  get tipoSeguridadFormArray(){
+  get tipoSeguridadFormArray() {
     return this.houseForm.get('tipoSeguridad') as FormArray;
   }
 
   //  Compruebo que los checked esten selccionados 
-  isChecked (value: string): boolean{
+  isChecked(value: string): boolean {
     return this.tipoSeguridadFormArray.value.includes(value);
   }
 
   // Manejo de checkbox
-  onCheckboxChange(event: any){
+  onCheckboxChange(event: any) {
     const value = event.target.value;
     const formArray = this.tipoSeguridadFormArray;
-    if(event.target.checked){
-      if(!formArray.value.includes(value)){
+    if (event.target.checked) {
+      if (!formArray.value.includes(value)) {
         formArray.push(this.fb.control(value));
       }
-    }else{
+    } else {
       const index = formArray.controls.findIndex(ctrl => ctrl.value === value);
-      if(index >=0){
+      if (index >= 0) {
         formArray.removeAt(index);
       }
     }
   }
 
   //Seleccionar todo
-  toggleAllCheckboxes(event: any){
+  toggleAllCheckboxes(event: any) {
     const formArray = this.tipoSeguridadFormArray;
     formArray.clear();
-    if (event.target.checked){
-      this.tiposSeguridad.forEach(tipo=> formArray.push(this.fb.control(tipo)));
+    if (event.target.checked) {
+      this.tiposSeguridad.forEach(tipo => formArray.push(this.fb.control(tipo)));
     }
   }
 

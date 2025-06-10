@@ -150,6 +150,41 @@
     </div>
   </div>
 
+  <div class="tiposCasas-group">
+      <label for="type">Tipos de casas:</label>
+      <select id="type" formControlName="type" class="form-control">
+        <option value="piso">Piso</option>
+        <option value="casa">Casa</option>
+        <option value="ático">Átio</option>
+        <option value="chalet">Chalet</option>
+        <option value="estudio">Estudio</option>
+      </select>
+  </div>
+
+  <div>
+    <label for="bedrooms">Numero de dormitorios:</label>
+    <input id="bedrooms" formControlName="bedrooms" type="number" min="1" />
+    <div *ngIf="houseForm.get('bedrooms')?.touched && houseForm.get('bedrooms')?.invalid">
+      <small *ngIf="houseForm.get('bedrooms')?.hasError('required')">
+       Numero de dormitorios obligatorios.
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label for="hasGarage">¿Tiene garje?</label>
+    <label>
+      <input type="radio" value="si" formControlName="hasGarage" /> Sí
+    </label>
+    <label>
+      <input type="radio" value="no" formControlName="hasGarage" /> No
+    </label>
+    <div *ngIf="houseForm.get('hasGarage')?.touched && houseForm.get('hasGarage')?.invalid">
+      <small *ngIf="houseForm.get('hasGarage')?.hasError('required')">
+        El campo garaje es obligatorio
+      </small>
+    </div>
+  </div>
 
   <button type="submit" [disabled]="houseForm.invalid">Enviar</button>
 </form>

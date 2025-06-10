@@ -16,4 +16,9 @@ export interface HousingLocation {
   tipoSeguridad: "alarmas" | "camaras" | "puertasReforzadas" | "detectorHumos" | "otro"| "noTiene";
   status: "desponible" | "reservado" | "vendido" | "alquilado";
   coordinates: Coordinates;
+
+  type:"piso"|"estudio"|"ático"|"chalet"|"estudio";
+  bedrooms:number;
+  hasGarage: boolean;
+  
 }

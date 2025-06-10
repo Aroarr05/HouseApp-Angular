@@ -15,7 +15,10 @@
       "coordinates": {
         "latitude": 41.8781,
         "longitude": -87.6298
-      }
+      },
+      "type": "piso",
+      "bedrooms": 5,
+      "hasGarage": true
     },
     {
       "id": "1",
@@ -32,7 +35,10 @@
       "coordinates": {
         "latitude": 34.0195,
         "longitude": -118.4912
-      }
+      },
+      "type": "casa",
+      "bedrooms": 8,
+      "hasGarage": true
     },
     {
       "id": "2",
@@ -49,7 +55,10 @@
       "coordinates": {
         "latitude": 58.3019,
         "longitude": -134.4197
-      }
+      },
+      "type": "piso",
+      "bedrooms": 3,
+      "hasGarage": false
     },
     {
       "id": "3",
@@ -66,7 +75,10 @@
       "coordinates": {
         "latitude": 41.8781,
         "longitude": -87.6298
-      }
+      },
+      "type": "ático",
+      "bedrooms": 5,
+      "hasGarage": false
     },
     {
       "id": "4",
@@ -83,7 +95,10 @@
       "coordinates": {
         "latitude": 41.5934,
         "longitude": -87.3464
-      }
+      },
+      "type": "chalet",
+      "bedrooms": 2,
+      "hasGarage": false
     },
     {
       "id": "5",
@@ -100,7 +115,10 @@
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
-      }
+      },
+      "type": "chalet",
+      "bedrooms": 2,
+      "hasGarage": true
     },
     {
       "id": "6",
@@ -117,7 +135,10 @@
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
-      }
+      },
+      "type": "estudio",
+      "bedrooms": 1,
+      "hasGarage": true
     },
     {
       "id": "7",
@@ -134,7 +155,10 @@
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
-      }
+      },
+      "type": "chalet",
+      "bedrooms": 4,
+      "hasGarage": false
     },
     {
       "id": "8",
@@ -151,7 +175,10 @@
       "coordinates": {
         "latitude": 37.8044,
         "longitude": -122.2711
-      }
+      },
+      "type": "casa",
+      "bedrooms": 2,
+      "hasGarage": false
     },
     {
       "id": "9",
@@ -168,10 +195,13 @@
       "coordinates": {
         "latitude": 45.5051,
         "longitude": -122.675
-      }
+      },
+      "type": "estudio",
+      "bedrooms": 1,
+      "hasGarage": false
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Av",
       "city": "ññ",
       "state": "dd",
@@ -191,10 +221,13 @@
       "coordinates": {
         "latitude": 63,
         "longitude": 45
-      }
+      },
+      "type": "piso",
+      "bedrooms": 1,
+      "hasGarage": false
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Av",
       "city": "ññ",
       "state": "dd",
@@ -211,7 +244,30 @@
       "coordinates": {
         "latitude": 63,
         "longitude": 888
-      }
+      },
+      "type": "estudio",
+      "bedrooms": 3,
+      "hasGarage": false
+    },
+    {
+      "id": 12,
+      "name": "arivrio",
+      "city": "nuevo",
+      "state": "nuevo",
+      "photo": "https://ethic.es/wp-content/uploads/2023/03/imagen.jpg",
+      "availableUnits": 5,
+      "wifi": true,
+      "laundry": false,
+      "seguridad": "no",
+      "tipoSeguridad": [],
+      "status": "desponible",
+      "coordinates": {
+        "latitude": 444,
+        "longitude": 444
+      },
+      "type": "casa",
+      "bedrooms": 5,
+      "hasGarage": false
     }
   ]
 }
